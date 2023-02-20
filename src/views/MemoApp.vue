@@ -1,38 +1,51 @@
 <template>
   <h1>Vue メモ</h1>
   <div class="memo-list">
-    <ul class="memo-list__container">
+    <ul
+      class="memo-list__container"
+      v-for="(memo, index) in memos"
+      :key="index"
+    >
       <li class="memo">
         <div class="memo__checkbox">
-          <input type="checkbox" />
+          <input type="checkbox" v-model="memo.isDone" />
         </div>
-        <div class="memo__text">ひき肉を300g買う</div>
-        <button class="memo__delete">削除</button>
-      </li>
-      <li class="memo">
-        <div class="memo__checkbox">
-          <input type="checkbox" />
+        <div v-if="memo.isDone" class="memo__text memo__text--done">
+          {{ memo.text }}
         </div>
-        <div class="memo__text">ホウレンソウを1束買う</div>
-        <button class="memo__delete">削除</button>
-      </li>
-      <li class="memo">
-        <div class="memo__checkbox">
-          <input type="checkbox" />
-        </div>
-        <div class="memo__text">ピーマンを2個買う</div>
-        <button class="memo__delete">削除</button>
+        <div v-else class="memo__text">{{ memo.text }}</div>
+        <button class="memo__delete" @click="deleteMemo(index)">削除</button>
       </li>
     </ul>
     <div class="add-memo-field">
-      <input class="add-memo-field__input" type="text" />
-      <button class="add-memo-field__button">追加</button>
+      <input class="add-memo-field__input" type="text" v-model="inputMemo" />
+      <button class="add-memo-field__button" @click="addMemo">追加</button>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      inputMemo: "",
+      memos: [],
+    }
+  },
+  methods: {
+    addMemo() {
+      const memo = {
+        text: this.inputMemo,
+        isDone: false,
+      }
+      this.memos.push(memo)
+      this.inputMemo = ""
+    },
+    deleteMemo(index) {
+      this.memos.splice(index, 1)
+    },
+  },
+}
 </script>
 
 <style scoped>
