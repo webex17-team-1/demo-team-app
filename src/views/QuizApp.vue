@@ -9,13 +9,13 @@
     />
     <div class="container">
       <button>
-        {{ quiz.choises[0].text }}
+        {{ quiz.choices[0].text }}
       </button>
       <button>
-        {{ quiz.choises[1].text }}
+        {{ quiz.choices[1].text }}
       </button>
       <button>
-        {{ quiz.choises[2].text }}
+        {{ quiz.choices[2].text }}
       </button>
     </div>
     <div>{{ "答え" }}</div>
