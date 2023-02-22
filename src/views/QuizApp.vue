@@ -13,6 +13,7 @@
       </button>
     </div>
     <div>{{ feedback }}</div>
+    <!--<div><button disabled="{{isDisabled}}">次の問題へ</button></div>-->
   </div>
 </template>
 
@@ -20,12 +21,13 @@
 export default {
   data() {
     return {
+      isDisabled: false,
       feedback: "",
       quiz_num: 0,
       quizs: [
         {
           text: "このキャラクターは誰でしょう",
-          image: "rei.jpg",
+          image: require("../assets/rei.jpg"),
           choices: [
             {
               text: "リツコ",
@@ -40,13 +42,13 @@ export default {
             {
               text: "アスカ",
               isCorrect: false,
-              feedback: "残念。アスカは",
+              feedback: "残念。アスカじゃないです。",
             },
           ],
         },
         {
-          text: "1枚目の写真の信頼度は何%でしょうか",
-          image: "rei.jpg",
+          text: "この写真の信頼度は何%でしょうか",
+          image: require("../assets/rei_haikei.jpg"),
           choices: [
             {
               text: "15%",
@@ -61,7 +63,7 @@ export default {
             {
               text: "83%",
               isCorrect: true,
-              feedback: "正解。こんなに信頼度高いけど、意外と外れます",
+              feedback: "正解。こんなに信頼度高いけど意外と外れます。",
             },
           ],
         },
@@ -71,14 +73,14 @@ export default {
   methods: {
     choiced(choice) {
       this.feedback = choice.feedback
-      if (choice.isCorrect && this.quiz_num != length(this.quizs) - 1) {
+      if (choice.isCorrect && this.quiz_num != this.quizs.length - 1) {
         this.quiz_num += 1
       }
     },
   },
   computed: {
     quizImagePath() {
-      return "./assets/" + this.quiz.image
+      return this.quizs[this.quiz_num].image
     },
   },
 }
