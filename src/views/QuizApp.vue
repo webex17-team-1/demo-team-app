@@ -13,7 +13,15 @@
       </button>
     </div>
     <div>{{ feedback }}</div>
-    <!--<div><button disabled="{{isDisabled}}">次の問題へ</button></div>-->
+    <div>
+      <button
+        id="next-button"
+        v-on:click="nextQuiz"
+        v-bind:disabled="isDisabled"
+      >
+        次の問題へ
+      </button>
+    </div>
   </div>
 </template>
 
@@ -21,7 +29,7 @@
 export default {
   data() {
     return {
-      isDisabled: false,
+      isDisabled: true,
       feedback: "",
       quiz_num: 0,
       quizs: [
@@ -74,7 +82,16 @@ export default {
     choiced(choice) {
       this.feedback = choice.feedback
       if (choice.isCorrect && this.quiz_num != this.quizs.length - 1) {
-        this.quiz_num += 1
+        this.isDisabled = false
+      }
+    },
+    nextQuiz() {
+      this.quiz_num += 1
+      this.isDisabled = true
+      this.feedback = ""
+      if ((this.quiz_num = this.quizs.length - 1)) {
+        const nextButton = document.getElementById("next-button")
+        nextButton.remove()
       }
     },
   },
