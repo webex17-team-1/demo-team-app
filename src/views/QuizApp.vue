@@ -34,7 +34,7 @@ export default {
       quiz_num: 0,
       quizs: [
         {
-          text: "このキャラクターは誰でしょう",
+          text: "このキャラクターは誰でしょうか",
           image: require("../assets/rei.jpg"),
           choices: [
             {
@@ -55,23 +55,44 @@ export default {
           ],
         },
         {
-          text: "この写真の信頼度は何%でしょうか",
-          image: require("../assets/rei_haikei.jpg"),
+          text: "このキャラクターは誰でしょうか",
+          image: require("../assets/gendou.jpg"),
           choices: [
             {
-              text: "15%",
-              isCorrect: false,
-              feedback: "残念。もっとアツいです。",
-            },
-            {
-              text: "67%",
-              isCorrect: false,
-              feedback: "残念。もう少しアツいです。",
-            },
-            {
-              text: "83%",
+              text: "ゲンドウ",
               isCorrect: true,
-              feedback: "正解。こんなに信頼度高いけど意外と外れます。",
+              feedback: "正解。主人公のお父さんです。",
+            },
+            {
+              text: "冬月先生",
+              isCorrect: false,
+              feedback: "残念、違います。",
+            },
+            {
+              text: "加持",
+              isCorrect: false,
+              feedback: "残念、違います。",
+            },
+          ],
+        },
+        {
+          text: "最終問題 このキャラクターは誰でしょうか",
+          image: require("../assets/kaorukun.jpg"),
+          choices: [
+            {
+              text: "シンジ君",
+              isCorrect: true,
+              feedback: "残念、違います。",
+            },
+            {
+              text: "カオル君",
+              isCorrect: true,
+              feedback: "正解です。",
+            },
+            {
+              text: "加持",
+              isCorrect: false,
+              feedback: "残念、違います。",
             },
           ],
         },
@@ -89,7 +110,7 @@ export default {
       this.quiz_num += 1
       this.isDisabled = true
       this.feedback = ""
-      if ((this.quiz_num = this.quizs.length - 1)) {
+      if (this.quiz_num === this.quizs.length - 1) {
         const nextButton = document.getElementById("next-button")
         nextButton.remove()
       }
