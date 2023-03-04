@@ -40,9 +40,24 @@ export default {
       }
       this.memos.push(memo)
       this.inputMemo = ""
+      localStorage.memos = JSON.stringify(this.memos)
     },
     deleteMemo(index) {
       this.memos.splice(index, 1)
+      localStorage.memos = JSON.stringify(this.memos)
+    },
+  },
+  mounted() {
+    if (localStorage.memos) {
+      this.memos = JSON.parse(localStorage.memos)
+    }
+  },
+  watch: {
+    memos: {
+      handler() {
+        localStorage.memos = JSON.stringify(this.memos)
+      },
+      deep: true,
     },
   },
 }
@@ -55,6 +70,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  /* width: 200px; */
   max-width: 512px;
   margin-left: auto;
   margin-right: auto;
